@@ -2,55 +2,40 @@ import Image from "next/image";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import profilePicture from "app/components/images/main-pic.png";
 import LayoutTriangle from "app/components/layout/layoutTriangle";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFolder } from "@fortawesome/free-regular-svg-icons";
-import { faGithubSquare } from "@fortawesome/free-brands-svg-icons";
-import {
-  faExternalLinkSquareAlt,
-  faGlobe,
-} from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import SingleAppCard from "app/components/elements/cards/singleAppCard";
+import { useEffect, useState } from "react";
+
 const myLoader = ({ src, width, quality }) => {
   return `app/components/images/main-pic?${src}?w=${width}&q=${quality || 75}`;
 };
 
-export default function Home() {
-  const myApps = [
-    {
-      image: profilePicture,
-      header: "Client Manager",
-      desc: "Disik ",
-      technologies: ["next js", "react", "mongo db"],
-    },
-    {
-      image: profilePicture,
-      header: "Playerek",
-      desc: "Disik ",
-      technologies: [
-        "next js",
-        "react",
-        "next js",
-        "react",
-        "next js",
-        "react",
-        "next js",
-      ],
-      links: {
-        live: "asd",
-      },
-    },
-    {
-      image: profilePicture,
-      header: "RCP",
-      desc: "Disik ",
-      technologies: ["next js", "react", "mongo db"],
-      links: {
-        github: "asd",
-      },
-    },
-  ];
+export default function Home({ setTitle }) {
+  const [data, setData] = useState({});
+  const [techs, setTechs] = useState({});
+  const [loadingData, setLoadingData] = useState(true);
+  const [loadingTechs, setLoadingTechs] = useState(true);
+  useEffect(() => {
+    setTitle("Strona główna");
+    axios
+      .get("http://localhost:3000/api/getApps")
+      .then((item) => {
+        setData(item.data);
+        setLoadingData(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    axios.get("http://localhost:3000/api/getTechs").then((item) => {
+      setTechs(item.data);
+      setLoadingTechs(false);
+    });
+  }, []);
+
   return (
     <>
-      <Container className="border-bottom">
+      <title>Strona główna</title>
+      <Container className="border-bottom" style={{ minHeight: "60vh" }}>
         <div className="d-flex justify-content-around align-items-center flex-wrap my-3">
           <div className="mb-lg-5">
             <h1>Damian Woźniak</h1>
@@ -67,70 +52,52 @@ export default function Home() {
           </div>
         </div>
       </Container>
-      <LayoutTriangle bg="gray-900" text="light">
+      <LayoutTriangle
+        className="d-flex align-items-center"
+        bg="gray-900"
+        text="light"
+        style={{ minHeight: "60vh" }}
+      >
         <h1>Moje aplikacje</h1>
         <Container className="my-4 d-flex flex-column gap-5">
-          <div className="d-flex flex-wrap">
-            {myApps.map((item, index) => {
-              return (
-                <Col xs={12} md={6} xl={4}>
-                  <Col
-                    className="bg-light text-dark d-flex flex-column p-4 gap-3 m-3"
-                    key={index}
-                  >
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div>
-                        <FontAwesomeIcon icon={faFolder} size="3x" />
-                      </div>
-                      <div>
-                        {item.links && (
-                          <>
-                            {item.links.github && (
-                              <Button
-                                variant="outline"
-                                href={item.links.github}
-                              >
-                                <FontAwesomeIcon
-                                  icon={faGithubSquare}
-                                  size="2x"
-                                />
-                              </Button>
-                            )}
-                            {item.links.live && (
-                              <Button variant="outline" href={item.links.live}>
-                                <FontAwesomeIcon icon={faGlobe} size="2x" />
-                              </Button>
-                            )}
-                          </>
-                        )}
-                      </div>
-                    </div>
-                    <div>
-                      <h3>{item.header}</h3>
-                      <p>{item.desc}</p>
-                    </div>
-                    <div className="d-flex flex-wrap">
-                      {item.technologies.map((tech, techIndex) => {
-                        return (
-                          <small className="text-muted px-2 " key={techIndex}>
-                            {tech}
-                          </small>
-                        );
-                      })}
-                    </div>
+          <div className="d-flex flex-wrap justify-content-around">
+            {loadingData ? (
+              <>LOADI</>
+            ) : (
+              data.map((item, index) => {
+                return (
+                  <Col xs={12} md={6} xl={4} key={index}>
+                    <SingleAppCard item={item} />
                   </Col>
-                </Col>
-              );
-            })}
+                );
+              })
+            )}
           </div>
           <div className="d-flex justify-content-end">
             <Button variant="success">Zobacz więcej...</Button>
           </div>
         </Container>
       </LayoutTriangle>
-      <LayoutTriangle bg="gray-900" text="light">
-        h3h3
-      </LayoutTriangle>
+      <Container style={{ minHeight: "600px" }}>
+        <h1>Technologie</h1>
+        <div className="d-flex flex-wrap justify-content-around gap-5 pt-5">
+          {loadingTechs ? (
+            <>LOADI</>
+          ) : (
+            techs.map((item, index) => {
+              return (
+                <span
+                  className="d-flex flex-column align-items-center"
+                  key={index}
+                >
+                  <i className={`px-5 py-2 display-3 ${item.icon}`}></i>
+                  {item.title}
+                </span>
+              );
+            })
+          )}
+        </div>
+      </Container>
     </>
   );
 }
