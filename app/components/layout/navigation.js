@@ -16,7 +16,13 @@ function MainNavigation() {
   const [navItem, setNavItem] = useState("/");
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        bg="dark"
+        variant="dark"
+        style={{ zIndex: 6 }}
+      >
         <Container>
           <Navbar.Brand href="#home">Damian Woźniak</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />

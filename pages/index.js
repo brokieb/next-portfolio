@@ -35,7 +35,7 @@ export default function Home({ setTitle }) {
   return (
     <>
       <title>Strona główna</title>
-      <Container className="border-bottom" style={{ minHeight: "60vh" }}>
+      <Container style={{ minHeight: "60vh" }}>
         <div className="d-flex justify-content-around align-items-center flex-wrap my-3">
           <div className="mb-lg-5">
             <h1>Damian Woźniak</h1>

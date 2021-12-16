@@ -95,7 +95,8 @@
   border-radius: 50%;
   margin-right: 15px;
 }
-.single-timeline-area .single-timeline-content .timeline-icon i {
+.single-timeline-area .single-timeline-content .timeline-icon .icon {
+  margin-top: 6px;
   color: #ffffff;
   line-height: 30px;
 }

@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
   const [title, setTitle] = useState("'");
   return (
     <SSRProvider>
-      <div className="min-vh-100  min-w-100 w-100 d-flex flex-column gap-3">
+      <div className="min-vh-100  min-w-100 w-100 d-flex flex-column gap-3 overflow-hidden">
         <Head>
           <title>DW - {title}</title>
           <meta
@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
             setTitle={setTitle}
           />
         </div>
-        <footer>
+        <footer style={{ zIndex: 6 }}>
           <LayoutTriangle
             className="d-flex align-items-center"
             bg="gray-900"
@@ -47,6 +47,9 @@ function MyApp({ Component, pageProps }) {
               <br />
             </address>
           </LayoutTriangle>
+          <div className="bg-dark text-light px-5 pb-2 text-end">
+            Damian Woźniak 2021 ©
+          </div>
         </footer>
       </div>
     </SSRProvider>

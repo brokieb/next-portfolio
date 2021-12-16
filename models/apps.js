@@ -6,6 +6,9 @@ const AppsSchema = new mongoose.Schema({
     /* The name of this pet */
     type: String,
   },
+  techDesc: {
+    type: String,
+  },
   shortDesc: {
     type: String,
   },

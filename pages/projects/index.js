@@ -1,8 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import dayjs from "dayjs";
 export default function Home() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -48,11 +49,8 @@ export default function Home() {
                 <div className="col-12">
                   <div className="apland-timeline-area">
                     <div className="single-timeline-area">
-                      <div
-                        className="timeline-date wow fadeInLeft"
-                        data-wow-delay="0.1s"
-                      >
-                        <p>{item[0]}</p>
+                      <div className="timeline-date">
+                        <p>{dayjs(item[0]).format("MM YYYY")}</p>
                       </div>
 
                       <div className="row">
@@ -60,7 +58,7 @@ export default function Home() {
                           console.log(single, "<");
                           return (
                             <div
-                              className="col-12 col-md-6 col-lg-4"
+                              className="col-12 col-md-8 col-lg-5"
                               key={index}
                             >
                               <div
@@ -68,17 +66,18 @@ export default function Home() {
                                 data-wow-delay="0.3s"
                               >
                                 <div className="timeline-icon">
-                                  <i
-                                    className="fa fa-address-card"
-                                    aria-hidden="true"
-                                  ></i>
+                                  <FontAwesomeIcon
+                                    icon={faStar}
+                                    className="icon"
+                                  />
                                 </div>
                                 <div className="timeline-text">
-                                  <h6>Updated 5.0</h6>
-                                  <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit.
-                                  </p>
+                                  <h6>{single.title}</h6>
+                                  <p>{single.shortDesc}</p>
+                                  <hr className="m-2" />
+                                  <small>
+                                    <i>{single.techDesc}</i>
+                                  </small>
                                 </div>
                               </div>
                             </div>
