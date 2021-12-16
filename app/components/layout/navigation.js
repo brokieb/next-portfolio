@@ -39,37 +39,40 @@ function MainNavigation() {
                   </Link>
                 </Nav.Item>
                 <Nav.Item>
+                  <Link href="/about" passHref>
+                    <Nav.Link>O mnie</Nav.Link>
+                  </Link>
+                </Nav.Item>
+                <Nav.Item>
                   <Link href="/projects" passHref>
                     <Nav.Link>Projekty</Nav.Link>
                   </Link>
                 </Nav.Item>
-                <Nav.Item>
-                  <Link href="/technologies" passHref>
-                    <Nav.Link>Technologie</Nav.Link>
-                  </Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link href="/cv" passHref>
-                    <Nav.Link>CV</Nav.Link>
-                  </Link>
-                </Nav.Item>
+                <span className="d-flex align-items-center px-2">
+                  <Button variant="success" size="sm">
+                    Moje CV
+                  </Button>
+                </span>
               </Nav>
               <Nav
                 activeKey="/"
                 className="d-flex flex-row justify-content-around justify-content-lg-end gap-5 gap-lg-3"
               >
                 <Nav.Item>
-                  <Nav.Link href="http://facebook.com" target="_blank">
+                  <Nav.Link href="https://github.com/brokieb" target="_blank">
                     <FontAwesomeIcon icon={faGithub} size="lg" />
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link href="http://facebook.com" target="_blank">
+                  <Nav.Link
+                    href="https://www.linkedin.com/in/damian-wozniak-br/"
+                    target="_blank"
+                  >
                     <FontAwesomeIcon icon={faLinkedin} size="lg" />
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link href="http://facebook.com" target="_blank">
+                  <Nav.Link href="mailto:damian@wozniak1.pl" target="_blank">
                     <FontAwesomeIcon icon={faAt} size="lg" />
                   </Nav.Link>
                 </Nav.Item>

@@ -21,6 +21,10 @@ const AppsSchema = new mongoose.Schema({
   otherTechnologies: {
     type: Array,
   },
+  mainPage: {
+    type: Boolean,
+    default: false,
+  },
   links: {
     github: {
       type: String,

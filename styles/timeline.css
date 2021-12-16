@@ -36,6 +36,7 @@
     width: 100px;
   }
 }
+
 .single-timeline-area .timeline-date::after {
   position: absolute;
   width: 3px;
@@ -58,13 +59,7 @@
   z-index: 5;
   margin-top: -5.5px;
 }
-.single-timeline-area .timeline-date p {
-  margin-bottom: 0;
-  color: #020710;
-  font-size: 13px;
-  text-transform: uppercase;
-  font-weight: 500;
-}
+
 .single-timeline-area .single-timeline-content {
   position: relative;
   z-index: 1;

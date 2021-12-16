@@ -1,8 +1,14 @@
 * {
   box-sizing: border-box;
+  font-family: "Lato", sans-serif;
 }
-h1,
-h2,
-h3 {
-  padding-left: 0.5em;
+/* //#f1c40f */
+.bg-main {
+  background: #f1c40f;
+}
+.text-main {
+  color: #f1c40f;
+}
+.pointer {
+  cursor: pointer;
 }
