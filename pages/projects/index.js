@@ -7,7 +7,7 @@ export default function Home() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios.get("http://localhost:3000/api/getApps").then((item) => {
+    axios.get("/api/getApps").then((item) => {
       setItems(item.data);
       setLoading(false);
     });
