@@ -41,9 +41,9 @@ export default function Home() {
       <>LOAD</>
     ) : (
       <>
-        {Object.entries(data).map((item) => {
+        {Object.entries(data).map((item, mainIndex) => {
           return (
-            <div>
+            <div key={mainIndex}>
               <div className="row">
                 <div className="col-12">
                   <div className="apland-timeline-area">
@@ -56,10 +56,13 @@ export default function Home() {
                       </div>
 
                       <div className="row">
-                        {data[item[0]].map((single) => {
+                        {data[item[0]].map((single, index) => {
                           console.log(single, "<");
                           return (
-                            <div className="col-12 col-md-6 col-lg-4">
+                            <div
+                              className="col-12 col-md-6 col-lg-4"
+                              key={index}
+                            >
                               <div
                                 className="single-timeline-content d-flex wow fadeInLeft"
                                 data-wow-delay="0.3s"
