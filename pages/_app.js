@@ -7,6 +7,7 @@ import { useState } from "react";
 import LayoutTriangle from "app/components/layout/layoutTriangle";
 import { SSRProvider } from "@react-aria/ssr";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import "styles/timeline.css";
 import { Button, Container } from "react-bootstrap";
 function MyApp({ Component, pageProps }) {
   const [title, setTitle] = useState("'");

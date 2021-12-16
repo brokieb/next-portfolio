@@ -18,7 +18,7 @@ export default function Home({ setTitle }) {
   useEffect(() => {
     setTitle("Strona główna");
     axios
-      .get("http://localhost:3000/api/getApps")
+      .get("/api/getApps")
       .then((item) => {
         setData(item.data);
         setLoadingData(false);
@@ -26,7 +26,7 @@ export default function Home({ setTitle }) {
       .catch((err) => {
         console.log(err);
       });
-    axios.get("http://localhost:3000/api/getTechs").then((item) => {
+    axios.get("/api/getTechs").then((item) => {
       setTechs(item.data);
       setLoadingTechs(false);
     });
