@@ -19,6 +19,7 @@
     "dayjs": "^1.10.7",
     "devicon": "^2.14.0",
     "devicons": "^1.8.0",
+    "framer-motion": "^5.5.4",
     "html-react-parser": "^1.4.3",
     "mongodb": "^4.2.2",
     "mongoose": "^6.1.2",

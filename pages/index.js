@@ -5,6 +5,7 @@ import LayoutTriangle from "app/components/layout/layoutTriangle";
 import axios from "axios";
 import SingleAppCard from "app/components/elements/cards/singleAppCard";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const myLoader = ({ src, width, quality }) => {
   return `app/components/images/main-pic?${src}?w=${width}&q=${quality || 75}`;
@@ -66,9 +67,16 @@ export default function Home({ setTitle }) {
             ) : (
               data.map((item, index) => {
                 return (
-                  <Col xs={12} md={6} xl={4} key={index}>
+                  <motion.div
+                    whileHover={{
+                      scale: 1.1,
+                      transition: { duration: 0.3 },
+                    }}
+                    className="col-xs-12 col-md-6 col-xl-4"
+                    key={index}
+                  >
                     <SingleAppCard item={item} />
-                  </Col>
+                  </motion.div>
                 );
               })
             )}
@@ -86,13 +94,18 @@ export default function Home({ setTitle }) {
           ) : (
             techs.map((item, index) => {
               return (
-                <span
+                <motion.span
+                  whileHover={{
+                    scale: 1.1,
+                    rotate: 10,
+                    transition: { duration: 0.3 },
+                  }}
                   className="d-flex flex-column align-items-center"
                   key={index}
                 >
                   <i className={`px-5 py-2 display-3 ${item.icon}`}></i>
                   {item.title}
-                </span>
+                </motion.span>
               );
             })
           )}
