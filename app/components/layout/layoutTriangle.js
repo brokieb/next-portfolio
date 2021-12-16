@@ -11,16 +11,17 @@ export default function LayoutTriangle({
 }) {
   return (
     <>
-      <div
-        className="start-0 mt-5 "
-        style={{
-          maxWidth: "100%",
-          borderStyle: "solid",
-          borderWidth: "0 0 80px 100vw",
-          borderColor: `transparent transparent var(--bs-${bg}) transparent`,
-          height: "100px",
-        }}
-      />
+      {!topHidden && (
+        <div
+          className="start-0 mt-5 "
+          style={{
+            width: "100%",
+            clipPath: "polygon(-5% 101%, 101% 101%, 101% 30%)",
+            background: `var(--bs-${bg})`,
+            height: "100px",
+          }}
+        />
+      )}
 
       <div
         className={`text-light p-5 ${className}`}
@@ -28,15 +29,16 @@ export default function LayoutTriangle({
       >
         <Container>{children}</Container>
       </div>
-      <div
-        className="start-0"
-        style={{
-          borderStyle: "solid",
-          borderWidth: "80px 100vw 0 0",
-          borderColor: `var(--bs-${bg}) transparent transparent transparent`,
-          height: "100px",
-        }}
-      />
+      {!botHidden && (
+        <div
+          className="start-0"
+          style={{
+            clipPath: "polygon(0 60%, 110% -1%, 0 -1%)",
+            background: `var(--bs-${bg})`,
+            height: "100px",
+          }}
+        />
+      )}
     </>
   );
 }

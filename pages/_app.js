@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
             setTitle={setTitle}
           />
         </div>
-        {/* <footer>
+        <footer>
           <LayoutTriangle
             className="d-flex align-items-center"
             bg="gray-900"
@@ -39,9 +39,15 @@ function MyApp({ Component, pageProps }) {
             botHidden={true}
             minHeight="50px"
           >
-            <p className="m-0">Damian Woźniak 2021</p>
+            <address>
+              Damian Woźniak <br />
+              damian@wozniak1.pl
+              <br />
+              Kraków, Poland
+              <br />
+            </address>
           </LayoutTriangle>
-        </footer> */}
+        </footer>
       </div>
     </SSRProvider>
   );
