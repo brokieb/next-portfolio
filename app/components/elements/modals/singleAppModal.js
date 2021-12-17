@@ -1,10 +1,11 @@
 import { Modal, Button, Row, Col } from "react-bootstrap";
 import htmlParser from "html-react-parser";
 export default function SingleAppModal({ item, show, handleClose }) {
+  console.log(item, "@@");
   return (
     <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>{item.header}</Modal.Title>
+        <Modal.Title>{item.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Row>

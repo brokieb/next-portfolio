@@ -16,7 +16,10 @@ export default function SingleAppCard({ item }) {
 
   return (
     <>
-      <Col className="bg-light text-dark d-flex flex-column p-4 gap-3 m-3">
+      <Col
+        className="bg-light text-dark d-flex flex-column p-4 gap-3 m-3 pointer"
+        onClick={() => setShow(true)}
+      >
         <div className="d-flex justify-content-between align-items-center">
           <div>
             <FontAwesomeIcon icon={faFolder} size="3x" />

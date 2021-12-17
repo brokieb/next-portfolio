@@ -7,7 +7,7 @@ export default function Home({ setTitle }) {
     setTitle("O mnie");
   }, []);
   return (
-    <Container className="d-flex justify-content-center align-items-center flex-column">
+    <Container className="d-flex justify-content-start align-items-center flex-column min-vh-100">
       <Image
         src={profilePicture}
         alt="Picture of the author"

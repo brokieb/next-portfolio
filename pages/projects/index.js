@@ -4,6 +4,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import dayjs from "dayjs";
+import Loading from "app/components/layout/loading";
+import SingleTimelineCard from "app/components/elements/cards/singleTimelineCard";
 export default function Home() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -32,14 +34,13 @@ export default function Home() {
         resolve(datas);
       });
       promise1.then((item) => {
-        console.log(item, "?");
         setData(item);
         setLoad(false);
       });
     }, []);
 
     return load ? (
-      <>LOAD</>
+      <Loading stillLoad={load} />
     ) : (
       <>
         {Object.entries(data).map((item, mainIndex) => {
@@ -55,32 +56,8 @@ export default function Home() {
 
                       <div className="row">
                         {data[item[0]].map((single, index) => {
-                          console.log(single, "<");
                           return (
-                            <div
-                              className="col-12 col-md-8 col-lg-5"
-                              key={index}
-                            >
-                              <div
-                                className="single-timeline-content d-flex wow fadeInLeft"
-                                data-wow-delay="0.3s"
-                              >
-                                <div className="timeline-icon">
-                                  <FontAwesomeIcon
-                                    icon={faStar}
-                                    className="icon"
-                                  />
-                                </div>
-                                <div className="timeline-text">
-                                  <h6>{single.title}</h6>
-                                  <p>{single.shortDesc}</p>
-                                  <hr className="m-2" />
-                                  <small>
-                                    <i>{single.techDesc}</i>
-                                  </small>
-                                </div>
-                              </div>
-                            </div>
+                            <SingleTimelineCard single={single} key={index} />
                           );
                         })}
                       </div>
@@ -96,7 +73,7 @@ export default function Home() {
   }
   return (
     <>
-      <Container>
+      <Container className=" min-vh-100">
         <section className="timeline_area section_padding_130">
           <div className="container">
             <div className="row justify-content-center">
@@ -108,7 +85,7 @@ export default function Home() {
               </div>
             </div>
             <div className="row">
-              {loading ? <>LOAD</> : <RenderTimeLine items={items} />}
+              {loading ? <Loading /> : <RenderTimeLine items={items} />}
             </div>
           </div>
         </section>

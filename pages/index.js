@@ -7,8 +7,10 @@ import SingleAppCard from "app/components/elements/cards/singleAppCard";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import { faArrowRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import SectionHeader from "app/components/layout/sectionHeader";
+import Loading from "app/components/layout/loading";
 const myLoader = ({ src, width, quality }) => {
   return `app/components/images/main-pic?${src}?w=${width}&q=${quality || 75}`;
 };
@@ -59,54 +61,58 @@ export default function Home({ setTitle }) {
   return (
     <>
       <title>Strona główna</title>
-      <FadeInWhenVisible>
-        <Container style={{ minHeight: "60vh" }}>
-          <Row>
-            <Col
-              xs={12}
-              md={6}
-              className="mb-lg-5 d-flex justify-content-center flex-column"
-            >
-              <SectionHeader>
-                <h1 className="m-0 d-inline-block">Damian Woźniak</h1>
-              </SectionHeader>
-              <h4>Web developer</h4>
-              <p className="pt-3">
-                <strong>Witam na moim portfolio :) </strong> Jestem prężnie
-                rozwijającym się twórcą aplikacji. Staram się rozwiązywać
-                problemy moich klientów, tworząc dopasowane aplikacje w zakresie
-                backendu i frontendu. Bardzo dobrze odnajduję się w tworzeniu
-                struktur baz danych i organizacją ich zarówno SQL i noSQL.
-                <hr />
-                Bardzo polubiłem tworzenie stron internetowych w react, next JS
-                - i w tą stronę się rozwijam
-              </p>
-            </Col>
-            <Col xs={12} md={6}>
+      <Container style={{ minHeight: loadingData ? "100vh" : "60vh" }}>
+        <Row>
+          <Col
+            xs={12}
+            md={6}
+            className="mb-lg-5 d-flex justify-content-center flex-column"
+          >
+            <SectionHeader>
+              <h1 className="m-0 d-inline-block">Damian Woźniak</h1>
+            </SectionHeader>
+            <h4>Web developer</h4>
+            <p className="pt-3">
+              <strong>Witam na moim portfolio :) </strong> Jestem prężnie
+              rozwijającym się twórcą aplikacji. Staram się rozwiązywać problemy
+              moich klientów, tworząc dopasowane aplikacje w zakresie backendu i
+              frontendu. Bardzo dobrze odnajduję się w tworzeniu struktur baz
+              danych i organizacją ich zarówno SQL i noSQL.
+            </p>
+            <hr />
+            <p>
+              Bardzo polubiłem tworzenie stron internetowych w react, next JS -
+              i w tą stronę się rozwijam
+            </p>
+          </Col>
+          <Col xs={12} md={6} className="d-flex justify-content-center">
+            <span>
               <Image
                 src={profilePicture}
                 alt="Picture of the author"
                 width={400}
                 height={400}
+                className="img-thumbnail rounded"
+                onLoad={() => {}}
               />
-            </Col>
-          </Row>
-        </Container>
-        <div style={{ height: "100px" }}>
-          <motion.div
-            className="d-flex justify-content-center display-4"
-            animate={{
-              paddingTop: [0, 5, 10, 20, 5, 0],
-            }}
-            transition={{
-              times: [0, 0.2, 0.5, 0.8, 1],
-              repeat: Infinity,
-            }}
-          >
-            <FontAwesomeIcon icon={faChevronDown} size="xl" />
-          </motion.div>
-        </div>
-      </FadeInWhenVisible>
+            </span>
+          </Col>
+        </Row>
+      </Container>
+      <div style={{ height: "100px" }} className="pt-5">
+        <motion.div
+          className="d-flex justify-content-center display-4"
+          animate={{
+            paddingTop: [0, 5, 10, 20, 5, 0],
+          }}
+          transition={{
+            times: [0, 0.2, 0.5, 0.8, 1],
+            repeat: Infinity,
+          }}
+        >
+          <FontAwesomeIcon icon={faChevronDown} size="1x" />
+        </motion.div>
+      </div>
       <LayoutTriangle
         className="d-flex align-items-center"
         bg="gray-900"
@@ -120,37 +126,46 @@ export default function Home({ setTitle }) {
           <Container className="my-4 d-flex flex-column gap-5">
             <div className="d-flex flex-wrap justify-content-around">
               {loadingData ? (
-                <>LOADI</>
+                <Loading variant="light" />
               ) : (
-                data.map((item, index) => {
-                  return (
-                    <motion.div
-                      whileHover={{
-                        scale: 1.1,
-                        transition: { duration: 0.3 },
+                <>
+                  {data.map((item, index) => {
+                    return (
+                      <motion.div
+                        whileHover={{
+                          scale: 1.1,
+                          transition: { duration: 0.3 },
+                        }}
+                        className="col-xs-12 col-md-6 col-xl-4"
+                        key={index}
+                      >
+                        <SingleAppCard item={item} />
+                      </motion.div>
+                    );
+                  })}
+                  <div className="d-flex justify-content-end w-100 pt-3">
+                    <motion.span
+                      animate={{
+                        marginRight: [0, 10, 0],
                       }}
-                      className="col-xs-12 col-md-6 col-xl-4"
-                      key={index}
+                      transition={{
+                        times: 1,
+                        repeat: Infinity,
+                      }}
                     >
-                      <SingleAppCard item={item} />
-                    </motion.div>
-                  );
-                })
+                      <Link href="/projects">
+                        <Button variant="success" size="sm">
+                          Zobacz więcej
+                          <FontAwesomeIcon
+                            icon={faArrowRight}
+                            className="ms-2"
+                          />
+                        </Button>
+                      </Link>
+                    </motion.span>
+                  </div>
+                </>
               )}
-            </div>
-            <div className="d-flex justify-content-end">
-              <motion.button
-                animate={{
-                  marginRight: [0, 10, 0],
-                }}
-                transition={{
-                  times: 1,
-                  repeat: Infinity,
-                }}
-                className="btn btn-success"
-              >
-                Zobacz więcej...
-              </motion.button>
             </div>
           </Container>
         </FadeInWhenVisible>
@@ -162,7 +177,7 @@ export default function Home({ setTitle }) {
           </SectionHeader>
           <div className="d-flex flex-wrap justify-content-around gap-5 pt-5">
             {loadingTechs ? (
-              <>LOADI</>
+              <Loading />
             ) : (
               techs.map((item, index) => {
                 return (
