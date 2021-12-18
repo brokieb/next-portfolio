@@ -13,13 +13,8 @@ import SectionHeader from "app/components/layout/sectionHeader";
 import Loading from "app/components/layout/loading";
 import { useG11n } from "next-g11n";
 import dictionary from "app/locales/dictionary";
-import dbConnect from "app/lib/mongodb";
-import App from "models/apps";
-import Techs from "models/techs";
-const myLoader = ({ src, width, quality }) => {
-  return `app/components/images/main-pic?${src}?w=${width}&q=${quality || 75}`;
-};
-
+import { getData as techsData } from "pages/api/getTechs";
+import { getData as appsData } from "pages/api/getApps";
 export default function Home({ setTitle, techs, apps }) {
   const { translate: t } = useG11n(dictionary);
   useEffect(() => {
@@ -175,11 +170,8 @@ export default function Home({ setTitle, techs, apps }) {
 
 export async function getStaticProps(context) {
   try {
-    await dbConnect();
-    const apps = await App.find({ mainPage: true })
-      .sort({ finishDate: -1 })
-      .limit(3);
-    const techs = await Techs.find().sort({ order: 1 });
+    const apps = await appsData(true, 4);
+    const techs = await techsData();
 
     return {
       props: {

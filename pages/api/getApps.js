@@ -1,9 +1,15 @@
 import dbConnect from "app/lib/mongodb";
 import App from "models/apps";
-export default async (req, res) => {
+
+export async function getData(mainPage = false, limit = 9999) {
   await dbConnect();
-  const ans = await App.find(req.query.mainPage ? { mainPage: true } : {})
+  const ans = await App.find(mainPage ? { mainPage: true } : {})
     .sort({ finishDate: -1 })
-    .limit(req.query.limit ? parseInt(req.query.limit) : 999);
-  res.status(200).json(ans);
-};
+    .limit(limit ? parseInt(limit) : 999);
+  return ans;
+}
+
+export default async function handler(req, res) {
+  const jsonData = await getData(req.query.mainPage, req.query.limit);
+  res.status(200).json(jsonData);
+}

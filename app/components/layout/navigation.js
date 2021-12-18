@@ -23,7 +23,7 @@ export default function navigation() {
       className="ftco_navbar ftco-navbar-light"
     >
       <Container>
-        <Navbar.Brand href="index.html">DAMIAN WOŹNIAK</Navbar.Brand>
+        <Navbar.Brand href="/">DAMIAN WOŹNIAK</Navbar.Brand>
         <div className="social-media order-lg-last">
           <p className="mb-0 d-flex">
             <Nav.Link
