@@ -13,6 +13,9 @@ import SectionHeader from "app/components/layout/sectionHeader";
 import Loading from "app/components/layout/loading";
 import { useG11n } from "next-g11n";
 import dictionary from "app/locales/dictionary";
+import dbConnect from "app/lib/mongodb";
+import App from "models/apps";
+import Techs from "models/techs";
 const myLoader = ({ src, width, quality }) => {
   return `app/components/images/main-pic?${src}?w=${width}&q=${quality || 75}`;
 };
@@ -172,17 +175,16 @@ export default function Home({ setTitle, techs, apps }) {
 
 export async function getStaticProps(context) {
   try {
-    const apps = await axios //apps.data
-      .get("/api/getApps", {
-        params: {
-          mainPage: true,
-        },
-      });
-    const techs = await axios.get("/api/getTechs");
+    await dbConnect();
+    const apps = await App.find({ mainPage: true })
+      .sort({ finishDate: -1 })
+      .limit(3);
+    const techs = await Techs.find().sort({ order: 1 });
+
     return {
       props: {
-        techs: techs.data,
-        apps: apps.data,
+        techs: JSON.parse(JSON.stringify(techs)),
+        apps: JSON.parse(JSON.stringify(apps)),
       }, // will be passed to the page component as props
     };
   } catch (err) {

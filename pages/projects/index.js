@@ -7,7 +7,10 @@ import dayjs from "dayjs";
 import Loading from "app/components/layout/loading";
 import SingleTimelineCard from "app/components/elements/cards/singleTimelineCard";
 import { useG11n } from "next-g11n";
+import App from "models/apps";
+import dbConnect from "app/lib/mongodb";
 import dictionary from "app/locales/dictionary";
+
 export default function Home({ apps, setTitle }) {
   const { translate: t } = useG11n(dictionary);
   useEffect(() => {
@@ -97,15 +100,11 @@ export default function Home({ apps, setTitle }) {
 
 export async function getStaticProps(context) {
   try {
-    const apps = await axios //apps.data
-      .get("/api/getApps", {
-        params: {
-          mainPage: true,
-        },
-      });
+    await dbConnect();
+    const apps = await App.find().sort({ finishDate: -1 });
     return {
       props: {
-        apps: apps.data,
+        apps: JSON.parse(JSON.stringify(apps)),
       }, // will be passed to the page component as props
     };
   } catch (err) {
