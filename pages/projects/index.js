@@ -70,7 +70,7 @@ export default function Home({ apps, setTitle }) {
   }
   return (
     <>
-      <Container className=" min-vh-100">
+      <Container className="min-vh-100">
         <section className="timeline_area section_padding_130">
           <div className="container">
             <div className="row justify-content-center">
@@ -98,7 +98,7 @@ export default function Home({ apps, setTitle }) {
 export async function getStaticProps(context) {
   try {
     const apps = await axios //apps.data
-      .get("http://localhost:3000/api/getApps", {
+      .get("/api/getApps", {
         params: {
           mainPage: true,
         },

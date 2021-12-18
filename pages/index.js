@@ -173,12 +173,12 @@ export default function Home({ setTitle, techs, apps }) {
 export async function getStaticProps(context) {
   try {
     const apps = await axios //apps.data
-      .get("http://localhost:3000/api/getApps", {
+      .get("/api/getApps", {
         params: {
           mainPage: true,
         },
       });
-    const techs = await axios.get("http://localhost:3000/api/getTechs");
+    const techs = await axios.get("/api/getTechs");
     return {
       props: {
         techs: techs.data,
