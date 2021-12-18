@@ -1,8 +1,10 @@
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-
+import { useG11n } from "next-g11n";
+import dictionary from "app/locales/dictionary";
 export default function Loading({ children, variant = "dark", stillLoad }) {
+  const { translate: t } = useG11n(dictionary);
   const [longLoading, setLongLoading] = useState(false);
   const loadingContainer = {
     width: "5rem",
@@ -80,7 +82,7 @@ export default function Loading({ children, variant = "dark", stillLoad }) {
             transition={loadingCircleTransition}
           />
         </motion.div>
-        <span>Ładowanie..</span>
+        <span>{t("loading")}</span>
       </div>
     )
   );

@@ -6,16 +6,13 @@ import axios from "axios";
 import dayjs from "dayjs";
 import Loading from "app/components/layout/loading";
 import SingleTimelineCard from "app/components/elements/cards/singleTimelineCard";
-export default function Home() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+import { useG11n } from "next-g11n";
+import dictionary from "app/locales/dictionary";
+export default function Home({ apps, setTitle }) {
+  const { translate: t } = useG11n(dictionary);
   useEffect(() => {
-    axios.get("/api/getApps").then((item) => {
-      setItems(item.data);
-      setLoading(false);
-    });
+    setTitle(t("projectsNavLink"));
   }, []);
-
   function RenderTimeLine({ items }) {
     const [load, setLoad] = useState(true);
     const [data, setData] = useState({});
@@ -79,17 +76,44 @@ export default function Home() {
             <div className="row justify-content-center">
               <div className="col-12 col-sm-8 col-lg-6">
                 <div className="section_heading text-center">
-                  <h3>Moje projekty w czasie</h3>
+                  <h3>{t("appsPageContainerTitle")}</h3>
                   <div className="line"></div>
                 </div>
               </div>
             </div>
             <div className="row">
-              {loading ? <Loading /> : <RenderTimeLine items={items} />}
+              {apps.length > 0 ? (
+                <RenderTimeLine items={apps} />
+              ) : (
+                <>{t("noDataToShow")}</>
+              )}
             </div>
           </div>
         </section>
       </Container>
     </>
   );
+}
+
+export async function getStaticProps(context) {
+  try {
+    const apps = await axios //apps.data
+      .get("http://localhost:3000/api/getApps", {
+        params: {
+          mainPage: true,
+        },
+      });
+    return {
+      props: {
+        apps: apps.data,
+      }, // will be passed to the page component as props
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      props: {
+        apps: [],
+      },
+    };
+  }
 }

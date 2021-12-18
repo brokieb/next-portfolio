@@ -11,7 +11,10 @@ import {
   Badge,
   Button,
 } from "react-bootstrap";
+import { useG11n } from "next-g11n";
+import dictionary from "app/locales/dictionary";
 export default function navigation() {
+  const { translate: t } = useG11n(dictionary);
   const [navItem, setNavItem] = useState("/");
   return (
     <Navbar
@@ -62,17 +65,17 @@ export default function navigation() {
           >
             <Nav.Item>
               <Link href="/" passHref>
-                <Nav.Link>Strona Główna</Nav.Link>
+                <Nav.Link>{t("homeNavLink")}</Nav.Link>
               </Link>
             </Nav.Item>
             <Nav.Item>
               <Link href="/about" passHref>
-                <Nav.Link>O mnie</Nav.Link>
+                <Nav.Link>{t("aboutNavLink")}</Nav.Link>
               </Link>
             </Nav.Item>
             <Nav.Item>
               <Link href="/projects" passHref>
-                <Nav.Link>Projekty</Nav.Link>
+                <Nav.Link>{t("projectsNavLink")}</Nav.Link>
               </Link>
             </Nav.Item>
             <Nav.Item className="d-flex align-items-center">

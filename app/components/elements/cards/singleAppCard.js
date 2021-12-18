@@ -8,12 +8,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faGithubSquare } from "@fortawesome/free-brands-svg-icons";
 import SingleAppModal from "app/components/elements/modals/singleAppModal";
+import { useG11n } from "next-g11n";
+import dictionary from "app/locales/dictionary";
 export default function SingleAppCard({ item }) {
   const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+  const { translate: t } = useG11n(dictionary);
   return (
     <>
       <Col
@@ -48,7 +47,7 @@ export default function SingleAppCard({ item }) {
             className="text-primary text-decoration-underline"
             onClick={() => setShow(true)}
           >
-            Czytaj więcej...
+            {t("readMore")}
           </p>
         </div>
         <div className="d-flex flex-wrap">

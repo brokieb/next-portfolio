@@ -12,15 +12,20 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import "styles/timeline.css";
 import { motion } from "framer-motion";
 import { Button, Container } from "react-bootstrap";
+import Footer from "app/components/layout/footer";
+import { useG11n } from "next-g11n";
+import dictionary from "app/locales/dictionary";
+
 function MyApp({ Component, pageProps }) {
-  const [title, setTitle] = useState("'");
+  const { translate: t } = useG11n(dictionary);
   const [loading, setLoading] = useState(false);
+  const [title, setTitle] = useState(t("loading"));
   const router = useRouter();
 
   useEffect(() => {
     router.events.on("routeChangeStart", () => {
       setLoading(true);
-      setTitle("Ładowanie...");
+      setTitle(t("loading"));
     });
     router.events.on("routeChangeComplete", () => {
       setLoading(false);
@@ -42,40 +47,22 @@ function MyApp({ Component, pageProps }) {
         {loading ? (
           <></>
         ) : (
-          <motion.div
-            className="flex-grow-1"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <Component
-              {...pageProps}
-              className="w-100 h-100"
-              setTitle={setTitle}
-            />
-          </motion.div>
+          <>
+            <motion.div
+              className="flex-grow-1"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Component
+                {...pageProps}
+                className="w-100 h-100"
+                setTitle={setTitle}
+              />
+            </motion.div>
+            <Footer />
+          </>
         )}
-        <footer style={{ zIndex: 6 }}>
-          <LayoutTriangle
-            className="d-flex align-items-center"
-            bg="gray-900"
-            text="light"
-            style={{ minHeight: "60vh" }}
-            botHidden={true}
-            minHeight="50px"
-          >
-            <address>
-              Damian Woźniak <br />
-              damian@wozniak1.pl
-              <br />
-              Kraków, Poland
-              <br />
-            </address>
-          </LayoutTriangle>
-          <div className="bg-dark text-light px-5 pb-2 text-end">
-            Damian Woźniak 2021 ©
-          </div>
-        </footer>
       </div>
     </SSRProvider>
   );

@@ -11,34 +11,16 @@ import Link from "next/link";
 import { faArrowRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import SectionHeader from "app/components/layout/sectionHeader";
 import Loading from "app/components/layout/loading";
+import { useG11n } from "next-g11n";
+import dictionary from "app/locales/dictionary";
 const myLoader = ({ src, width, quality }) => {
   return `app/components/images/main-pic?${src}?w=${width}&q=${quality || 75}`;
 };
 
-export default function Home({ setTitle }) {
-  const [data, setData] = useState({});
-  const [techs, setTechs] = useState({});
-  const [loadingData, setLoadingData] = useState(true);
-  const [loadingTechs, setLoadingTechs] = useState(true);
+export default function Home({ setTitle, techs, apps }) {
+  const { translate: t } = useG11n(dictionary);
   useEffect(() => {
-    setTitle("Strona główna");
-    axios
-      .get("/api/getApps", {
-        params: {
-          mainPage: true,
-        },
-      })
-      .then((item) => {
-        setData(item.data);
-        setLoadingData(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    axios.get("/api/getTechs").then((item) => {
-      setTechs(item.data);
-      setLoadingTechs(false);
-    });
+    setTitle(t("homeNavLink"));
   }, []);
 
   function FadeInWhenVisible({ children }) {
@@ -60,8 +42,7 @@ export default function Home({ setTitle }) {
 
   return (
     <>
-      <title>Strona główna</title>
-      <Container style={{ minHeight: loadingData ? "100vh" : "60vh" }}>
+      <Container style={{ minHeight: "60vh" }}>
         <Row>
           <Col
             xs={12}
@@ -69,21 +50,12 @@ export default function Home({ setTitle }) {
             className="mb-lg-5 d-flex justify-content-center flex-column"
           >
             <SectionHeader>
-              <h1 className="m-0 d-inline-block">Damian Woźniak</h1>
+              <h1 className="m-0 d-inline-block">{t("hello")}</h1>
             </SectionHeader>
             <h4>Web developer</h4>
-            <p className="pt-3">
-              <strong>Witam na moim portfolio :) </strong> Jestem prężnie
-              rozwijającym się twórcą aplikacji. Staram się rozwiązywać problemy
-              moich klientów, tworząc dopasowane aplikacje w zakresie backendu i
-              frontendu. Bardzo dobrze odnajduję się w tworzeniu struktur baz
-              danych i organizacją ich zarówno SQL i noSQL.
-            </p>
+            <p className="pt-3">{t("helloMain")}</p>
             <hr />
-            <p>
-              Bardzo polubiłem tworzenie stron internetowych w react, next JS -
-              i w tą stronę się rozwijam
-            </p>
+            <p>{t("helloSufix")}</p>
           </Col>
           <Col xs={12} md={6} className="d-flex justify-content-center">
             <span>
@@ -120,52 +92,47 @@ export default function Home({ setTitle }) {
         style={{ minHeight: "60vh" }}
       >
         <SectionHeader>
-          <h1 className="m-0 d-inline-block">Moje aplikacje</h1>
+          <h1 className="m-0 d-inline-block">{t("appsContainerTitle")}</h1>
         </SectionHeader>
         <FadeInWhenVisible>
           <Container className="my-4 d-flex flex-column gap-5">
             <div className="d-flex flex-wrap justify-content-around">
-              {loadingData ? (
-                <Loading variant="light" />
-              ) : (
-                <>
-                  {data.map((item, index) => {
-                    return (
-                      <motion.div
-                        whileHover={{
-                          scale: 1.1,
-                          transition: { duration: 0.3 },
-                        }}
-                        className="col-xs-12 col-md-6 col-xl-4"
-                        key={index}
-                      >
-                        <SingleAppCard item={item} />
-                      </motion.div>
-                    );
-                  })}
-                  <div className="d-flex justify-content-end w-100 pt-3">
-                    <motion.span
-                      animate={{
-                        marginRight: [0, 10, 0],
+              {apps.length > 0 ? (
+                apps.map((item, index) => {
+                  return (
+                    <motion.div
+                      whileHover={{
+                        scale: 1.1,
+                        transition: { duration: 0.3 },
                       }}
-                      transition={{
-                        times: 1,
-                        repeat: Infinity,
-                      }}
+                      className="col-xs-12 col-md-6 col-xl-4"
+                      key={index}
                     >
-                      <Link href="/projects">
-                        <Button variant="success" size="sm">
-                          Zobacz więcej
-                          <FontAwesomeIcon
-                            icon={faArrowRight}
-                            className="ms-2"
-                          />
-                        </Button>
-                      </Link>
-                    </motion.span>
-                  </div>
-                </>
+                      <SingleAppCard item={item} />
+                    </motion.div>
+                  );
+                })
+              ) : (
+                <>{t("noDataToShow")}</>
               )}
+              <div className="d-flex justify-content-end w-100 pt-3">
+                <motion.span
+                  animate={{
+                    marginRight: [0, 10, 0],
+                  }}
+                  transition={{
+                    times: 1,
+                    repeat: Infinity,
+                  }}
+                >
+                  <Link href="/projects">
+                    <Button variant="success" size="sm">
+                      {t("showMore")}
+                      <FontAwesomeIcon icon={faArrowRight} className="ms-2" />
+                    </Button>
+                  </Link>
+                </motion.span>
+              </div>
             </div>
           </Container>
         </FadeInWhenVisible>
@@ -173,12 +140,10 @@ export default function Home({ setTitle }) {
       <FadeInWhenVisible>
         <Container style={{ minHeight: "600px" }}>
           <SectionHeader>
-            <h1 className="m-0 d-inline-block">Technologie</h1>
+            <h1 className="m-0 d-inline-block">{t("techsContainerTitle")}</h1>
           </SectionHeader>
           <div className="d-flex flex-wrap justify-content-around gap-5 pt-5">
-            {loadingTechs ? (
-              <Loading />
-            ) : (
+            {techs.length > 0 ? (
               techs.map((item, index) => {
                 return (
                   <motion.span
@@ -195,10 +160,38 @@ export default function Home({ setTitle }) {
                   </motion.span>
                 );
               })
+            ) : (
+              <>{t("noDataToShow")}</>
             )}
           </div>
         </Container>
       </FadeInWhenVisible>
     </>
   );
+}
+
+export async function getStaticProps(context) {
+  try {
+    const apps = await axios //apps.data
+      .get("http://localhost:3000/api/getApps", {
+        params: {
+          mainPage: true,
+        },
+      });
+    const techs = await axios.get("http://localhost:3000/api/getTechs");
+    return {
+      props: {
+        techs: techs.data,
+        apps: apps.data,
+      }, // will be passed to the page component as props
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      props: {
+        techs: [],
+        apps: [],
+      },
+    };
+  }
 }

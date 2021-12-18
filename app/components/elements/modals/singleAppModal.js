@@ -1,7 +1,9 @@
 import { Modal, Button, Row, Col } from "react-bootstrap";
 import htmlParser from "html-react-parser";
+import { useG11n } from "next-g11n";
+import dictionary from "app/locales/dictionary";
 export default function SingleAppModal({ item, show, handleClose }) {
-  console.log(item, "@@");
+  const { translate: t } = useG11n(dictionary);
   return (
     <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -10,14 +12,14 @@ export default function SingleAppModal({ item, show, handleClose }) {
       <Modal.Body>
         <Row>
           <Col>
-            <h2>Opis</h2>
+            <h2>{t("details")}</h2>
 
             <strong>{item.shortDesc}</strong>
             <hr />
             {htmlParser(item.description)}
           </Col>
           <Col>
-            <h2>Technologie</h2>
+            <h2>{t("techsContainerTitle")}</h2>
             <ul>
               {item.mainTechnologies.map((item, index) => {
                 return (
@@ -35,7 +37,7 @@ export default function SingleAppModal({ item, show, handleClose }) {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
-          Zamknij
+          {t("close")}
         </Button>
       </Modal.Footer>
     </Modal>
