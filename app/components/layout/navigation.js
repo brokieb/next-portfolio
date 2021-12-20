@@ -29,6 +29,7 @@ export default function navigation() {
             <Nav.Link
               href="https://github.com/brokieb"
               target="_blank"
+              rel="noreferrer"
               className="d-flex align-items-center justify-content-center p-0"
             >
               <FontAwesomeIcon icon={faGithub} size="1x" />
@@ -36,6 +37,7 @@ export default function navigation() {
             <Nav.Link
               href="https://www.linkedin.com/in/damian-wozniak-br/"
               target="_blank"
+              rel="noreferrer"
               className="d-flex align-items-center justify-content-center p-0"
             >
               <FontAwesomeIcon icon={faLinkedin} size="1x" />
@@ -83,6 +85,7 @@ export default function navigation() {
                 <Button
                   href="cv.pdf"
                   target="_blank"
+                  rel="noreferrer"
                   style={{
                     background: "#F1C40F",
                     border: "#F1C40F",

@@ -224,11 +224,13 @@ export default function Home({ setTitle, techs, apps }) {
               <a
                 href="https://github.com/brokieb"
                 target="_blank"
+                rel="noreferrer"
                 className="d-flex align-items-center justify-content-center p-0 nav-link"
               >
                 <Link
                   href="https://github.com/brokieb"
                   target="_blank"
+                  rel="noreferrer"
                   className="d-flex align-items-center justify-content-center p-0"
                 >
                   <span className="fa-stack fa-1x">
@@ -239,6 +241,7 @@ export default function Home({ setTitle, techs, apps }) {
                 <Link
                   href="https://github.com/brokieb"
                   target="_blank"
+                  rel="noreferrer"
                   className="d-flex align-items-center justify-content-center p-0"
                 >
                   <span className="fa-stack fa-1x">
