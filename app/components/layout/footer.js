@@ -14,19 +14,9 @@ export default function Footer() {
         className="d-flex align-items-center"
         bg="gray-900"
         text="light"
-        style={{ minHeight: "60vh" }}
         botHidden={true}
-        minHeight="50px"
+        minHeight="10px"
       >
-        <address>
-          Damian Woźniak <br />
-          damian@wozniak1.pl
-          <br />
-          {t("address")}
-          <br />
-        </address>
-      </LayoutTriangle>
-      <div className="bg-dark">
         <Container className="d-flex align-items-center justify-content-end gap-3 text-light">
           <span className="text-light">Damian Woźniak 2021</span>
           <Link href="" locale="en">
@@ -36,7 +26,7 @@ export default function Footer() {
             <Image src={PLicon} height={40} width={25} />
           </Link>
         </Container>
-      </div>
+      </LayoutTriangle>
     </footer>
   );
 }

@@ -2,17 +2,32 @@ import mongoose from "mongoose";
 
 /* PetSchema will correspond to a collection in your MongoDB database. */
 const AppsSchema = new mongoose.Schema({
+  locale: {
+    pl: {
+      techDesc: {
+        type: String,
+      },
+      shortDesc: {
+        type: String,
+      },
+      description: {
+        type: String,
+      },
+    },
+    en: {
+      techDesc: {
+        type: String,
+      },
+      shortDesc: {
+        type: String,
+      },
+      description: {
+        type: String,
+      },
+    },
+  },
   title: {
     /* The name of this pet */
-    type: String,
-  },
-  techDesc: {
-    type: String,
-  },
-  shortDesc: {
-    type: String,
-  },
-  description: {
     type: String,
   },
   mainTechnologies: {
@@ -24,6 +39,9 @@ const AppsSchema = new mongoose.Schema({
   mainPage: {
     type: Boolean,
     default: false,
+  },
+  finishDate: {
+    type: Date,
   },
   links: {
     github: {

@@ -6,11 +6,13 @@ import {
   faExternalLinkSquareAlt,
   faGlobe,
 } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/router";
 import { faGithubSquare } from "@fortawesome/free-brands-svg-icons";
 import SingleAppModal from "app/components/elements/modals/singleAppModal";
 import { useG11n } from "next-g11n";
 import dictionary from "app/locales/dictionary";
 export default function SingleAppCard({ item }) {
+  const router = useRouter();
   const [show, setShow] = useState(false);
   const { translate: t } = useG11n(dictionary);
   return (
@@ -42,7 +44,7 @@ export default function SingleAppCard({ item }) {
         </div>
         <div>
           <h3>{item.title}</h3>
-          <p className="m-0">{item.shortDesc}</p>
+          <p className="m-0">{item.locale[router.locale].shortDesc}</p>
           <p
             className="text-primary text-decoration-underline"
             onClick={() => setShow(true)}

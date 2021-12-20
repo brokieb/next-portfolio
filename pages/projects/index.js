@@ -6,6 +6,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import Loading from "app/components/layout/loading";
 import SingleTimelineCard from "app/components/elements/cards/singleTimelineCard";
+
 import { useG11n } from "next-g11n";
 import { getData as appsData } from "pages/api/getApps";
 import dictionary from "app/locales/dictionary";
@@ -15,6 +16,7 @@ export default function Home({ apps, setTitle }) {
   useEffect(() => {
     setTitle(t("projectsNavLink"));
   }, []);
+
   function RenderTimeLine({ items }) {
     const [load, setLoad] = useState(true);
     const [data, setData] = useState({});

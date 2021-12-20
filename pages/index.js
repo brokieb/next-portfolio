@@ -8,13 +8,28 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import { faArrowRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faAt,
+  faChevronDown,
+  faMapMarked,
+  faMouse,
+  faPhone,
+  faSmile,
+} from "@fortawesome/free-solid-svg-icons";
 import SectionHeader from "app/components/layout/sectionHeader";
 import Loading from "app/components/layout/loading";
 import { useG11n } from "next-g11n";
 import dictionary from "app/locales/dictionary";
 import { getData as techsData } from "pages/api/getTechs";
 import { getData as appsData } from "pages/api/getApps";
+import { faCircle } from "@fortawesome/free-regular-svg-icons";
+import {
+  faFacebook,
+  faGithub,
+  faLinkedin,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
 export default function Home({ setTitle, techs, apps }) {
   const { translate: t } = useG11n(dictionary);
   useEffect(() => {
@@ -71,7 +86,7 @@ export default function Home({ setTitle, techs, apps }) {
       </Container>
       <div style={{ height: "100px" }} className="pt-5">
         <motion.div
-          className="d-flex justify-content-center display-4"
+          className="d-flex justify-content-center flex-column align-items-center display-4"
           animate={{
             paddingTop: [0, 5, 10, 20, 5, 0],
           }}
@@ -80,6 +95,7 @@ export default function Home({ setTitle, techs, apps }) {
             repeat: Infinity,
           }}
         >
+          <FontAwesomeIcon icon={faMouse} size="1x" />
           <FontAwesomeIcon icon={faChevronDown} size="1x" />
         </motion.div>
       </div>
@@ -164,6 +180,80 @@ export default function Home({ setTitle, techs, apps }) {
           </div>
         </Container>
       </FadeInWhenVisible>
+      <LayoutTriangle
+        className="d-flex align-items-center"
+        bg="gray-900"
+        text="light"
+        style={{ minHeight: "60vh" }}
+      >
+        <Container className="my-4 d-flex flex-column gap-5 text-center">
+          <div>
+            <Link href="/about">
+              <Button variant="success" size="lg">
+                DOWIEDZ SIĘ WIĘCEJ O MNIE KLIKAJĄC W TEN PRZYCISK :)
+              </Button>
+            </Link>
+          </div>
+        </Container>
+      </LayoutTriangle>
+      <FadeInWhenVisible>
+        <Container>
+          <SectionHeader>
+            <h1 className="m-0 d-inline-block">Dane kontaktowe</h1>
+          </SectionHeader>
+          <ul>
+            <li>
+              <FontAwesomeIcon icon={faSmile} className="me-2" />
+              <p className="d-inline-block">Damian Woźniak</p>
+            </li>
+            <li>
+              <FontAwesomeIcon icon={faMapMarked} className="me-2" />
+              <p className="d-inline-block">Kraków, Polska</p>
+            </li>
+            <li>
+              <FontAwesomeIcon icon={faPhone} className="me-2" />
+              <p className="d-inline-block">+48 575 654 814</p>
+            </li>
+            <li>
+              <FontAwesomeIcon icon={faAt} className="me-2" />
+              <p className="d-inline-block">damian@wozniak1.pl</p>
+            </li>
+          </ul>
+          <div>
+            <p className="mb-0 d-flex">
+              <a
+                href="https://github.com/brokieb"
+                target="_blank"
+                className="d-flex align-items-center justify-content-center p-0 nav-link"
+              >
+                <Link
+                  href="https://github.com/brokieb"
+                  target="_blank"
+                  className="d-flex align-items-center justify-content-center p-0"
+                >
+                  <span className="fa-stack fa-1x">
+                    <FontAwesomeIcon icon={faCircle} className="fa-stack-2x" />
+                    <FontAwesomeIcon icon={faGithub} className="fa-stack-1x" />
+                  </span>
+                </Link>
+                <Link
+                  href="https://github.com/brokieb"
+                  target="_blank"
+                  className="d-flex align-items-center justify-content-center p-0"
+                >
+                  <span className="fa-stack fa-1x">
+                    <FontAwesomeIcon icon={faCircle} className="fa-stack-2x" />
+                    <FontAwesomeIcon
+                      icon={faLinkedin}
+                      className="fa-stack-1x"
+                    />
+                  </span>
+                </Link>
+              </a>
+            </p>
+          </div>
+        </Container>
+      </FadeInWhenVisible>
     </>
   );
 }
@@ -172,7 +262,6 @@ export async function getStaticProps(context) {
   try {
     const apps = await appsData(true, 4);
     const techs = await techsData();
-
     return {
       props: {
         techs: JSON.parse(JSON.stringify(techs)),
@@ -185,7 +274,7 @@ export async function getStaticProps(context) {
       props: {
         techs: [],
         apps: [],
-      },
+      }, // will be passed to the page component as props
     };
   }
 }
