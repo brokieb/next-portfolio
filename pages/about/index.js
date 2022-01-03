@@ -1,6 +1,6 @@
 import { Container, Button, Row, Col } from "react-bootstrap";
 import Image from "next/image";
-import profilePicture from "app/components/images/main-pic.png";
+import profilePicture from "app/components/images/main-pic.jpeg";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -119,9 +119,6 @@ export default function Home({ setTitle, dis }) {
         Za moje cele które sobie wyznaczyłem na przyszłe dni/tygodnie jest na
         pewno nauka TypeScript
       </p>
-      <a href="#" style={{ color: "inherit" }}>
-        ?
-      </a>
     </Container>
   );
 }

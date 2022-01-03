@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import profilePicture from "app/components/images/main-pic.png";
+import profilePicture from "app/components/images/main-pic.jpeg";
 import LayoutTriangle from "app/components/layout/layoutTriangle";
 import axios from "axios";
 import SingleAppCard from "app/components/elements/cards/singleAppCard";
@@ -225,33 +225,23 @@ export default function Home({ setTitle, techs, apps }) {
                 href="https://github.com/brokieb"
                 target="_blank"
                 rel="noreferrer"
-                className="d-flex align-items-center justify-content-center p-0 nav-link"
+                className="d-flex align-items-center justify-content-center p-0"
               >
-                <Link
-                  href="https://github.com/brokieb"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="d-flex align-items-center justify-content-center p-0"
-                >
-                  <span className="fa-stack fa-1x">
-                    <FontAwesomeIcon icon={faCircle} className="fa-stack-2x" />
-                    <FontAwesomeIcon icon={faGithub} className="fa-stack-1x" />
-                  </span>
-                </Link>
-                <Link
-                  href="https://github.com/brokieb"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="d-flex align-items-center justify-content-center p-0"
-                >
-                  <span className="fa-stack fa-1x">
-                    <FontAwesomeIcon icon={faCircle} className="fa-stack-2x" />
-                    <FontAwesomeIcon
-                      icon={faLinkedin}
-                      className="fa-stack-1x"
-                    />
-                  </span>
-                </Link>
+                <span className="fa-stack fa-1x">
+                  <FontAwesomeIcon icon={faCircle} className="fa-stack-2x" />
+                  <FontAwesomeIcon icon={faGithub} className="fa-stack-1x" />
+                </span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/damian-wozniak-br/"
+                target="_blank"
+                rel="noreferrer"
+                className="d-flex align-items-center justify-content-center p-0"
+              >
+                <span className="fa-stack fa-1x">
+                  <FontAwesomeIcon icon={faCircle} className="fa-stack-2x" />
+                  <FontAwesomeIcon icon={faLinkedin} className="fa-stack-1x" />
+                </span>
               </a>
             </p>
           </div>

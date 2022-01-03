@@ -19,12 +19,12 @@ export default function Footer() {
       >
         <Container className="d-flex align-items-center justify-content-end gap-3 text-light">
           <span className="text-light">Damian Woźniak 2021</span>
-          <Link href="" locale="en">
+          {/* <Link href="" locale="en">
             <Image src={ENicon} height={40} width={25} />
           </Link>
           <Link href="" locale="pl">
             <Image src={PLicon} height={40} width={25} />
-          </Link>
+          </Link> */}
         </Container>
       </LayoutTriangle>
     </footer>
