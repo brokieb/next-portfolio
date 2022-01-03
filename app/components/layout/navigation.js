@@ -83,7 +83,7 @@ export default function navigation() {
             <Nav.Item className="d-flex align-items-center">
               <span>
                 <Button
-                  href="cv.pdf"
+                  href="cv-damian-wozniak.pdf"
                   target="_blank"
                   rel="noreferrer"
                   style={{
