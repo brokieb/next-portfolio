@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-
+import image from "app/components/images/main-pic.png";
 export default function LayoutTriangle({
   bg,
   text,
@@ -7,41 +7,36 @@ export default function LayoutTriangle({
   className,
   botHidden = false,
   topHidden = false,
+  test = false,
   midHidden = false,
   minHeight = "80vh",
 }) {
   return (
-    <>
-      {!topHidden && (
-        <div
-          className="start-0 mt-5 "
-          style={{
-            width: "100%",
-            clipPath: "polygon(-5% 101%, 100% 150%, 101% 30%)",
-            background: `var(--bs-${bg})`,
-            height: "100px",
-          }}
-        />
-      )}
+    <div
+      className={`position-relative py-5 ${
+        topHidden ? "mb-5" : botHidden ? "mt-5" : "my-5"
+      }`}
+    >
+      <div
+        className="position-absolute w-100 h-100 bg-dark top-0"
+        style={{
+          minHeight: minHeight,
+          background: typeof bg !== "object" ? `var(--bs-${bg})` : "inherit",
+          clipPath: `polygon(0 ${!topHidden ? "100px" : "0%"},100% 0,100% ${
+            !botHidden ? "90%" : "100%"
+          },0 100%)`, //top-left, top-right,bot-right,bot-left
+        }}
+      >
+        {typeof bg === "object" && bg}
+      </div>
       {!midHidden && (
         <div
-          className={`text-light p-5 ${className}`}
-          style={{ minHeight: minHeight, background: `var(--bs-${bg})` }}
+          className={`position-relative text-light p-5 ${className}`}
+          style={{ minHeight: minHeight, zIndex: 5 }}
         >
           <Container>{children}</Container>
         </div>
       )}
-
-      {!botHidden && (
-        <div
-          className="start-0"
-          style={{
-            clipPath: "polygon(0 60%, 110% -1%, 0 -1%)",
-            background: `var(--bs-${bg})`,
-            height: "100px",
-          }}
-        />
-      )}
-    </>
+    </div>
   );
 }

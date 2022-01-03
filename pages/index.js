@@ -4,7 +4,7 @@ import profilePicture from "app/components/images/main-pic.jpeg";
 import LayoutTriangle from "app/components/layout/layoutTriangle";
 import axios from "axios";
 import SingleAppCard from "app/components/elements/cards/singleAppCard";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
@@ -24,16 +24,22 @@ import dictionary from "app/locales/dictionary";
 import { getData as techsData } from "pages/api/getTechs";
 import { getData as appsData } from "pages/api/getApps";
 import { faCircle } from "@fortawesome/free-regular-svg-icons";
+
 import {
   faFacebook,
   faGithub,
   faLinkedin,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import Gallery from "react-photo-gallery";
+import { photos } from "app/components/elements/photos/photos";
+
 export default function Home({ setTitle, techs, apps }) {
   const { translate: t } = useG11n(dictionary);
+  React.useLayoutEffect = React.useEffect;
   useEffect(() => {
     setTitle(t("homeNavLink"));
+    console.log(photos);
   }, []);
 
   function FadeInWhenVisible({ children }) {
@@ -182,7 +188,16 @@ export default function Home({ setTitle, techs, apps }) {
       </FadeInWhenVisible>
       <LayoutTriangle
         className="d-flex align-items-center"
-        bg="gray-900"
+        bg={
+          <div style={{ filter: "blur(5px)" }}>
+            <Gallery
+              photos={photos}
+              direction={"column"}
+              top={20}
+              margin={30}
+            />
+          </div>
+        }
         text="light"
         style={{ minHeight: "60vh" }}
       >
@@ -190,7 +205,7 @@ export default function Home({ setTitle, techs, apps }) {
           <div>
             <Link href="/about">
               <Button variant="success" size="lg">
-                DOWIEDZ SIĘ WIĘCEJ O MNIE KLIKAJĄC W TEN PRZYCISK :)
+                DOWIEDZ SIĘ WIĘCEJ
               </Button>
             </Link>
           </div>

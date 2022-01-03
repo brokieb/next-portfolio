@@ -43,6 +43,11 @@ const AppsSchema = new mongoose.Schema({
   finishDate: {
     type: Date,
   },
+  credentials: {
+    loginLink: { type: String },
+    username: { type: String },
+    password: { type: String },
+  },
   links: {
     github: {
       type: String,
