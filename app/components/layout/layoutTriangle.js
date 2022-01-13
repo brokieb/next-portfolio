@@ -1,5 +1,4 @@
 import { Container } from "react-bootstrap";
-import image from "app/components/images/main-pic.png";
 export default function LayoutTriangle({
   bg,
   text,

@@ -61,12 +61,14 @@ export default function Home({ setTitle, techs, apps }) {
 
   return (
     <>
-      <Container style={{ minHeight: "60vh" }}>
+      <Container
+        style={{ minHeight: "60vh" }}
+        className="d-flex align-items-center"
+      >
         <Row>
           <Col
             xs={12}
-            md={6}
-            className="mb-lg-5 d-flex justify-content-center flex-column"
+            className="mb-lg-5 d-flex justify-content-center flex-column text-center align-items-center"
           >
             <SectionHeader>
               <h1 className="m-0 d-inline-block">{t("hello")}</h1>
@@ -75,18 +77,6 @@ export default function Home({ setTitle, techs, apps }) {
             <p className="pt-3">{t("helloMain")}</p>
             <hr />
             <p>{t("helloSufix")}</p>
-          </Col>
-          <Col xs={12} md={6} className="d-flex justify-content-center">
-            <span>
-              <Image
-                src={profilePicture}
-                alt="Picture of the author"
-                width={400}
-                height={400}
-                className="img-thumbnail rounded"
-                onLoad={() => {}}
-              />
-            </span>
           </Col>
         </Row>
       </Container>
